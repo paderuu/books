@@ -50,7 +50,11 @@ function makeBookList(bookList) {
   textYear.innerText = bookList.year;
 
   const textContainer = document.createElement('div');
-  container.classList.add('item', 'shadow');
+  textContainer.classList.add('inner');
+  textContainer.append(textTitle, textAuthor, textYear);
+
+  const container = document.createElement('div');
+  container.classList.add('book_item', 'shadow');
   container.append(textContainer);
   container.setAttribute('id', 'book-${bookList,id}');
 
