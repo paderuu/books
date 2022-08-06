@@ -115,6 +115,8 @@ main {
 }
 
 .search_section>form>label {
+    color: cornflowerblue;
+    font-size: 20px;
     display: flex;
     align-items: center;
 }
