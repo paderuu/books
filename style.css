@@ -36,8 +36,8 @@ main {
     display: flex;
     flex-direction: column;
     padding: 16px;
-    border: 1px solid black;
-    border-radius: 10px;
+    border: 1px solid cornflowerblue;
+    /* border-radius: 10px; */
 }
 
 .input_section>h2 {
@@ -47,13 +47,14 @@ main {
 
 .input_section>form>.input {
     margin: 8px 0;
+
 }
 
 .input_section>form>button {
     background-color: cornflowerblue;
     color: white;
     border: 0;
-    border-radius: 5px;
+    border: 1px solid cornflowerblue;
     display: block;
     width: 100%;
     padding: 8px;
@@ -68,7 +69,9 @@ main {
     display: block;
     width: 100%;
     padding: 8px;
-    border-radius: 5px;
+    border: 1px solid cornflowerblue;
+    margin-top: 10px;
+
 }
 
 
@@ -95,8 +98,8 @@ main {
     flex-direction: column;
     align-items: center;
     padding: 16px;
-    border: 1px solid black;
-    border-radius: 10px;
+    border: 1px solid cornflowerblue;
+    /* border-radius: 10px; */
 }
 
 .search_section>h2 {
@@ -118,14 +121,14 @@ main {
 
 .search_section>form>input {
     padding: 5px;
-    border-radius: 5px;
+    border: 1px solid cornflowerblue;
 }
 
 .search_section>form>button {
     background-color: cornflowerblue;
     color: white;
     border: 0;
-    border-radius: 5px;
+    /* border-radius: 5px; */
     cursor: pointer;
 }
 
@@ -135,9 +138,9 @@ main {
 
 .book_shelf {
     margin: 16px 0 0 0;
-    border: 1px solid black;
+    border: 1px solid cornflowerblue;
     padding: 16px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
 }
 
 .book_shelf>h2 {
@@ -161,6 +164,7 @@ main {
 .book_shelf>.book_list>.book_item>h3,
 p {
     margin: 8px 0;
+
 }
 
 .inner h2 {
@@ -169,4 +173,57 @@ p {
 
 .inner p {
     margin-top: 5px;
+}
+
+.check-button {
+    width: 40px;
+    height: 40px;
+
+    background: url('../assets/circle-check.svg');
+    background-size: contain;
+    margin-left: auto;
+    cursor: pointer;
+    border: none;
+}
+
+.check-button:hover {
+    background: url('../assets/circle-check-fill.svg');
+    background-size: contain;
+}
+
+.trash-button {
+    width: 40px;
+    height: 40px;
+
+    background: url('../assets/trash-empty.svg');
+    background-size: contain;
+    margin-left: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+.trash-button:hover {
+    background: url('../assets/trash.svg');
+    background-size: contain;
+}
+
+.undo-button {
+    width: 40px;
+    height: 40px;
+
+    background: url('../assets/reload-circle-outline.svg');
+    background-size: contain;
+    margin-left: auto;
+    cursor: pointer;
+    border: none;
+}
+
+.undo-button:hover {
+    background: url('../assets/reload-circle-sharp.svg');
+    background-size: contain;
+}
+
+.check-button:focus,
+.trash-button {
+    outline: none;
 }
