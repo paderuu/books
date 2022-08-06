@@ -19,11 +19,12 @@ function addBook() {
   books.push(bookList);
 
   document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
 }
 
-// document.addEventListener(RENDER_EVENT, function () {
-//   console.log(books);
-// });
+document.addEventListener(RENDER_EVENT, function () {
+  console.log(books);
+});
 
 function generateId() {
   return +new Date();
@@ -113,8 +114,9 @@ function addTaskCompleted(bookId) {
 
   if (bookTarget == null) return;
 
-  bookTarget.isCompleted = true;
+  bookTarget.isComplete = true;
   document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
 }
 
 function findBook(bookId) {
@@ -127,3 +129,68 @@ function findBook(bookId) {
   return null;
 }
 
+function undoTaskFromComplete(bookId) {
+  const bookTarget = findBook(bookId);
+
+  if (bookTarget == null) return;
+
+  bookTarget.isComplete = false;
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
+}
+
+function removeTaskFromCompleted(bookId) {
+  const bookTarget = findBookIndex(bookId);
+
+  if (bookTarget == -1) return;
+
+  books.splice(bookTarget, 1);
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
+}
+
+function findBookIndex(bookId) {
+  for (const index in books) {
+    if (books[index].id === bookId) {
+      return index;
+    }
+  }
+  return -1;
+}
+
+function saveData() {
+  if (isStorageExist()) {
+    const parsed = JSON.stringify(books);
+    localStorage.setItem(STORAGE_KEY, parsed);
+    document.dispatchEvent(new Event(SAVED_EVENT));
+  }
+}
+
+const SAVED_EVENT = 'save-book';
+const STORAGE_KEY = 'BOOKSHELF_APPS';
+
+function isStorageExist() {
+  if (typeof (Storage) === undefined) {
+    alert('Browser kamu tidak mendukung local storage');
+    return false;
+  }
+  return true;
+}
+
+document.addEventListener(SAVED_EVENT, function () {
+  console.log(localStorage.getItem(STORAGE_KEY));
+
+});
+
+function loadDataFromStorage() {
+  const serialData = localStorage.getItem(STORAGE_KEY);
+  let data = JSON.parse(serialData);
+
+  if (data !== null) {
+    for (const book of data) {
+      books.push(book);
+    }
+  }
+
+  document.dispatchEvent(new Event(RENDER_EVENT));
+}
