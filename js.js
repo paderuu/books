@@ -22,9 +22,9 @@ function addBook() {
   saveData();
 }
 
-document.addEventListener(RENDER_EVENT, function () {
-  console.log(books);
-});
+// document.addEventListener(RENDER_EVENT, function () {
+//   console.log(books);
+// });
 
 function generateId() {
   return +new Date();
@@ -91,7 +91,6 @@ function makeBookList(bookList) {
 }
 
 document.addEventListener(RENDER_EVENT, function () {
-
   const incompleteBOOKList = document.getElementById('incompleteBookshelfList');
   incompleteBOOKList.innerHTML = '';
 
