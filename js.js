@@ -1,5 +1,7 @@
 const books = [];
 const RENDER_EVENT = 'render-book'
+const SAVED_EVENT = 'save-book';
+const STORAGE_KEY = 'BOOKSHELF_APPS';
 
 document.addEventListener('DOMContentLoaded', function () {
   const submitForm = document.getElementById('inputBook');
@@ -7,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     event.preventDefault();
     addBook();
   });
+  if (isStorageExist()) {
+    loadDataFromStorage();
+  }
 });
 
 function addBook() {
@@ -164,9 +169,6 @@ function saveData() {
     document.dispatchEvent(new Event(SAVED_EVENT));
   }
 }
-
-const SAVED_EVENT = 'save-book';
-const STORAGE_KEY = 'BOOKSHELF_APPS';
 
 function isStorageExist() {
   if (typeof (Storage) === undefined) {
