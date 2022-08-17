@@ -5,15 +5,19 @@ const STORAGE_KEY = 'BOOKSHELF_APPS';
 
 document.addEventListener('DOMContentLoaded', function () {
   const submitForm = document.getElementById('inputBook');
+
+  // submit form input
   submitForm.addEventListener('submit', function (event) {
     event.preventDefault();
     addBook();
   });
+
   if (isStorageExist()) {
     loadDataFromStorage();
   }
 });
 
+// membuat data buku
 function addBook() {
   const bookTitle = document.getElementById('inputBookTitle').value;
   const bookAut = document.getElementById('inputBookAuthor').value;
@@ -26,10 +30,6 @@ function addBook() {
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
-
-// document.addEventListener(RENDER_EVENT, function () {
-//   console.log(books);
-// });
 
 function generateId() {
   return +new Date();
@@ -123,15 +123,16 @@ function addTaskCompleted(bookId) {
   saveData();
 }
 
+// mencari data buku sesuai Id
 function findBook(bookId) {
   for (const bookItem of books) {
     if (bookItem.id === bookId) {
       return bookItem;
     }
   }
-
   return null;
 }
+
 
 function undoTaskFromComplete(bookId) {
   const bookTarget = findBook(bookId);
@@ -195,3 +196,16 @@ function loadDataFromStorage() {
 
   document.dispatchEvent(new Event(RENDER_EVENT));
 }
+
+document.getElementById('searchBook').addEventListener("submit", function (event) {
+  event.preventDefault();
+  const searchBook = document.getElementById('searchBookTitle').value.toLowerCase();
+  const bookListQ = document.querySelectorAll('.inner > h2');
+  for (const books of bookListQ) {
+    if (books.innerText.toLowerCase().includes(searchBook)) {
+      books.parentElement.parentElement.style.display = "block ";
+    } else {
+      books.parentElement.parentElement.style.display = "none";
+    }
+  }
+});
