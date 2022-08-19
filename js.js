@@ -50,10 +50,10 @@ function makeBookList(bookList) {
   textTitle.innerText = bookList.title;
 
   const textAuthor = document.createElement('p');
-  textAuthor.innerText = bookList.author;
+  textAuthor.innerText = `Penulis : ${bookList.author}`;
 
   const textYear = document.createElement('p');
-  textYear.innerText = bookList.year;
+  textYear.innerText = `Tahun : ${bookList.year}`;
 
   const textContainer = document.createElement('div');
   textContainer.classList.add('inner');
@@ -72,6 +72,13 @@ function makeBookList(bookList) {
       undoTaskFromComplete(bookList.id);
     });
 
+    const editButton = document.createElement('button');
+    editButton.classList.add('edit-button');
+
+    editButton.addEventListener('click', function () {
+      editBook(bookList.id);
+    });
+
     const trashButton = document.createElement('button');
     trashButton.classList.add('trash-button');
 
@@ -79,7 +86,9 @@ function makeBookList(bookList) {
       removeTaskFromCompleted(bookList.id);
     });
 
-    container.append(undoButton, trashButton);
+
+
+    container.append(undoButton, editButton, trashButton);
 
   } else {
     const checkButton = document.createElement('button');
@@ -113,16 +122,6 @@ document.addEventListener(RENDER_EVENT, function () {
   }
 });
 
-function addTaskCompleted(bookId) {
-  const bookTarget = findBook(bookId);
-
-  if (bookTarget == null) return;
-
-  bookTarget.isComplete = true;
-  document.dispatchEvent(new Event(RENDER_EVENT));
-  saveData();
-}
-
 // mencari data buku sesuai Id
 function findBook(bookId) {
   for (const bookItem of books) {
@@ -134,24 +133,54 @@ function findBook(bookId) {
 }
 
 
-function undoTaskFromComplete(bookId) {
+// action button
+function addTaskCompleted(bookId) {
   const bookTarget = findBook(bookId);
 
   if (bookTarget == null) return;
 
+  bookTarget.isComplete = true;
+  document.dispatchEvent(new Event(RENDER_EVENT));
+  saveData();
+}
+
+//mengembalikan buku ke rak belum terbaca
+function undoTaskFromComplete(bookId) {
+  const bookTarget = findBook(bookId);
+  if (bookTarget == null) return;
   bookTarget.isComplete = false;
   document.dispatchEvent(new Event(RENDER_EVENT));
   saveData();
 }
 
+//menghapus data buku
 function removeTaskFromCompleted(bookId) {
   const bookTarget = findBookIndex(bookId);
+  const remove = confirm('anda yakin ingin menghapus buku ini ?');
+  if (remove == true) {
+    if (bookTarget == -1) return;
+    books.splice(bookTarget, 1);
+    document.dispatchEvent(new Event(RENDER_EVENT));
+    saveData();
+  }
+}
 
-  if (bookTarget == -1) return;
+// edit buku
+function editBook(bookId) {
+  for (const bookItem of books) {
+    if (bookItem.id === books) {
+      const titleNew = document.querySelector('#inputBookTitle').value;
+      const authorNew = document.querySelector('#inputBookAuthor').value;
+      const yearNew = document.querySelector('#inputBookYear').value;
 
-  books.splice(bookTarget, 1);
-  document.dispatchEvent(new Event(RENDER_EVENT));
-  saveData();
+      bookItem.title = titleNew;
+      bookItem.author = authorNew;
+      bookItem.year = yearNew;
+
+      document.dispatchEvent(new Event(RENDER_DATA_NEW));
+    }
+  }
+  document.dispatchEvent(new Event(RENDER_DATA_NEW));
 }
 
 function findBookIndex(bookId) {
@@ -163,6 +192,7 @@ function findBookIndex(bookId) {
   return -1;
 }
 
+// Fungsi ini digunakan untuk menyimpan data ke localStorage berdasarkan KEY yang sudah ditetapkan sebelumnya
 function saveData() {
   if (isStorageExist()) {
     const parsed = JSON.stringify(books);
@@ -171,6 +201,7 @@ function saveData() {
   }
 }
 
+//Fungsi ini digunakan untuk memeriksa apakah localStorage didukung oleh browser atau tidak
 function isStorageExist() {
   if (typeof (Storage) === undefined) {
     alert('Browser kamu tidak mendukung local storage');
@@ -178,12 +209,12 @@ function isStorageExist() {
   }
   return true;
 }
-
 document.addEventListener(SAVED_EVENT, function () {
   console.log(localStorage.getItem(STORAGE_KEY));
 
 });
 
+// Fungsi ini digunakan untuk memuat data dari localStorage dan memasukkan data hasil parsing ke variabel
 function loadDataFromStorage() {
   const serialData = localStorage.getItem(STORAGE_KEY);
   let data = JSON.parse(serialData);
@@ -193,17 +224,17 @@ function loadDataFromStorage() {
       books.push(book);
     }
   }
-
   document.dispatchEvent(new Event(RENDER_EVENT));
 }
 
+//fitur search judul buku
 document.getElementById('searchBook').addEventListener("submit", function (event) {
   event.preventDefault();
   const searchBook = document.getElementById('searchBookTitle').value.toLowerCase();
   const bookListQ = document.querySelectorAll('.inner > h2');
   for (const books of bookListQ) {
     if (books.innerText.toLowerCase().includes(searchBook)) {
-      books.parentElement.parentElement.style.display = "block ";
+      books.parentElement.parentElement.style.display = "flex";
     } else {
       books.parentElement.parentElement.style.display = "none";
     }

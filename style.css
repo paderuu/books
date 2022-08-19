@@ -156,7 +156,7 @@ main {
 }
 
 .book_shelf>.book_list>.book_item {
-    border-radius: 16px;
+    /* border-radius: 16px; */
     margin-top: 16px;
     padding: 12px 24px 12px 24px;
     background: white;
@@ -194,10 +194,24 @@ p {
     background-size: contain;
 }
 
+.edit-button {
+    width: 40px;
+    height: 40px;
+    background: url('../assets/pen-to-square-regular.svg');
+    background-size: contain;
+    margin-left: 16px;
+    cursor: pointer;
+    border: none;
+}
+
+.edit-button:hover {
+    background: url('../assets/pen-to-square-solid.svg');
+    background-size: contain;
+}
+
 .trash-button {
     width: 40px;
     height: 40px;
-
     background: url('../assets/trash-empty.svg');
     background-size: contain;
     margin-left: 16px;
@@ -226,7 +240,7 @@ p {
     background-size: contain;
 }
 
-.check-button:focus,
+/* .check-button:focus,
 .trash-button {
     outline: none;
-}
+} */
