@@ -167,21 +167,29 @@ function removeTaskFromCompleted(bookId) {
 
 // edit buku
 function editBook(bookId) {
-  for (const bookItem of books) {
-    if (bookItem.id === books) {
-      const titleNew = document.querySelector('#inputBookTitle').value;
-      const authorNew = document.querySelector('#inputBookAuthor').value;
-      const yearNew = document.querySelector('#inputBookYear').value;
+  document.getElementById("formEdit").style.display = "block"
+  // const edit = document.querySelector('');
 
-      bookItem.title = titleNew;
-      bookItem.author = authorNew;
-      bookItem.year = yearNew;
+  const bookList = findBook(bookId);
 
-      document.dispatchEvent(new Event(RENDER_DATA_NEW));
-    }
-  }
-  document.dispatchEvent(new Event(RENDER_DATA_NEW));
+  const editBookTitle = document.getElementById('editBookTitle');
+  editBookTitle.value = bookList.title;
+
+  const editBookAuthor = document.getElementById('editBookAuthor');
+  editBookAuthor.value = bookList.author;
+
+  const editBookYear = document.getElementById('editBookYear');
+  editBookYear.value = bookList.year;
+
 }
+
+
+
+function closeForm() {
+  document.getElementById("formEdit").style.display = "none";
+}
+
+
 
 function findBookIndex(bookId) {
   for (const index in books) {
@@ -231,8 +239,8 @@ function loadDataFromStorage() {
 document.getElementById('searchBook').addEventListener("submit", function (event) {
   event.preventDefault();
   const searchBook = document.getElementById('searchBookTitle').value.toLowerCase();
-  const bookListQ = document.querySelectorAll('.inner > h2');
-  for (const books of bookListQ) {
+  const bookList = document.querySelectorAll('.inner > h2');
+  for (const books of bookList) {
     if (books.innerText.toLowerCase().includes(searchBook)) {
       books.parentElement.parentElement.style.display = "flex";
     } else {

@@ -65,6 +65,29 @@
         </div>
       </section>
 
+
+      <div class="form-popup" id="formEdit" onclick="editBook()">
+        <form action="" class="form-container">
+          <h1>Ubah Data</h1>
+
+          <label for="editBookTitle"><b>Judul</b></label>
+          <input id="editBookTitle" type="text" placeholder="Masukan Judul Buku"
+            required>
+
+          <label for="editBookAuthor"><b>Penulis</b></label>
+          <input id="editBookAuthor" type="text" placeholder="Masukkan Nama
+            Penulis"
+            required>
+
+          <label for="editBookYear"><b>Tahun</b></label>
+          <input id="editBookYear" type="text" placeholder="Masukkan Tahun"
+            required>
+
+          <button type="submit" class="btn">Simpan</button>
+          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+      </div>
+
     </main>
 
     <script src="js.js"></script>
