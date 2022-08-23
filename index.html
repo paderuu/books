@@ -9,7 +9,7 @@
     <title>Bookshelf Apps</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css?family=Roboto+Mono&subset=greek"
       rel="stylesheet">
     <link rel="stylesheet" href="style.css">
   </head>
@@ -33,11 +33,12 @@
             <label for="inputBookYear">Tahun</label>
             <input id="inputBookYear" type="number" required>
           </div>
-          <!-- <div class="input_inline">
+          <div class="input_inline">
             <label for="inputBookIsComplete">Selesai dibaca</label>
             <input id="inputBookIsComplete" type="checkbox">
-          </div> -->
-          <button id="bookSubmit" type="submit" value="Submit">Masukkan Buku ke
+          </div>
+          <button id="bookSubmit" type="submit" value="Submit">Masukkan
+            Buku ke
             rak <span>Belum
               selesai dibaca</span></button>
         </form>
@@ -67,24 +68,29 @@
 
 
       <div class="form-popup" id="formEdit" onclick="editBook()">
-        <form action="" class="form-container">
+        <form class="form-container">
           <h1>Ubah Data</h1>
 
-          <label for="editBookTitle"><b>Judul</b></label>
-          <input id="editBookTitle" type="text" placeholder="Masukan Judul Buku"
-            required>
+          <label for="editTitle"><b>Judul</b></label>
+          <input id="editTitle" type="text" name="title"
+            placeholder="Masukan Judul Buku"
+            required/>
 
-          <label for="editBookAuthor"><b>Penulis</b></label>
-          <input id="editBookAuthor" type="text" placeholder="Masukkan Nama
-            Penulis"
-            required>
+          <label for="editAuthor"><b>Penulis</b></label>
+          <input id="editAuthor"
+            placeholder="Masukkan Nama Penulis" name="author"
+            type="text" required/>
 
-          <label for="editBookYear"><b>Tahun</b></label>
-          <input id="editBookYear" type="text" placeholder="Masukkan Tahun"
-            required>
+          <label for="editYear"><b>Tahun</b></label>
+          <input id="editYear" type="text" name="number"
+            placeholder="Masukkan Tahun"
+            required/>
 
-          <button type="submit" class="btn">Simpan</button>
-          <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+          <!-- <label for="editCompleted">Selesai Baca</label>
+          <input id="editCompleted" type="checkbox" name="completed" /> -->
+          <button id="saveEdit" type="submit" class="btn">Simpan</button>
+          <button type="button" class="btn cancel"
+            onclick="closeForm(event)">Close</button>
         </form>
       </div>
 

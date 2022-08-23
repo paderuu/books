@@ -86,8 +86,6 @@ function makeBookList(bookList) {
       removeTaskFromCompleted(bookList.id);
     });
 
-
-
     container.append(undoButton, editButton, trashButton);
 
   } else {
@@ -165,31 +163,25 @@ function removeTaskFromCompleted(bookId) {
   }
 }
 
-// edit buku
+//edit buku
 function editBook(bookId) {
-  document.getElementById("formEdit").style.display = "block"
-  // const edit = document.querySelector('');
+  document.getElementById("formEdit").style.display = "block";
+  const bookTarget = findBookIndex(bookId);
 
-  const bookList = findBook(bookId);
+  const newTitle = document.getElementById("editTitle");
+  newTitle.value = bookTarget.title;
+  const newAuthor = document.getElementById("editAuthor");
+  newAuthor.value = bookTarget.title;
+  const newYear = document.getElementById("editYear");
+  newYear.value = bookTarget.title;
 
-  const editBookTitle = document.getElementById('editBookTitle');
-  editBookTitle.value = bookList.title;
-
-  const editBookAuthor = document.getElementById('editBookAuthor');
-  editBookAuthor.value = bookList.author;
-
-  const editBookYear = document.getElementById('editBookYear');
-  editBookYear.value = bookList.year;
 
 }
 
-
-
-function closeForm() {
+function closeForm(event) {
+  event.stopPropagation()
   document.getElementById("formEdit").style.display = "none";
 }
-
-
 
 function findBookIndex(bookId) {
   for (const index in books) {

@@ -7,7 +7,7 @@
 body,
 input,
 button {
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', serif;
     background-color: #efefef;
 }
 
@@ -249,14 +249,14 @@ p {
     display: none;
     position: fixed;
     bottom: 0;
-    right: 15px;
-    border: 3px solid #f1f1f1;
+    right: 10%;
+    border: 1px solid cornflowerblue;
     z-index: 9;
 }
 
 .form-container {
     max-width: 500px;
-    padding: 10px;
+    padding: 30px;
     background-color: white;
 }
 
@@ -265,8 +265,7 @@ p {
     margin: 10px;
 }
 
-.form-container input[type=text],
-.form-container input[type=password] {
+.form-container input[type=text] {
     width: 100%;
     padding: 15px;
     margin: 5px 0 22px 0;
@@ -280,18 +279,18 @@ p {
 }
 
 .form-container .btn {
-    background-color: #04AA6D;
+    background-color: cornflowerblue;
     color: white;
     padding: 16px 20px;
     border: none;
     cursor: pointer;
     width: 100%;
-    margin-bottom: 10px;
+    margin: 10px 0;
     opacity: 0.8;
 }
 
 .form-container .cancel {
-    background-color: rgb(161, 0, 0);
+    background-color: cornflowerblue;
 }
 
 .form-container .btn:hover,
