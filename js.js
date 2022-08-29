@@ -167,14 +167,14 @@ function removeTaskFromCompleted(bookId) {
 function editBook(bookId) {
   document.getElementById("formEdit").style.display = "block";
   const bookTarget = findBookIndex(bookId);
+  console.log(bookId);
 
   const newTitle = document.getElementById("editTitle");
-  newTitle.value = bookTarget.title;
+  newTitle.value = books[bookTarget].title;
   const newAuthor = document.getElementById("editAuthor");
-  newAuthor.value = bookTarget.title;
+  newAuthor.value = books[bookTarget].author;
   const newYear = document.getElementById("editYear");
-  newYear.value = bookTarget.title;
-
+  newYear.value = books[bookTarget].year;
 
 }
 
